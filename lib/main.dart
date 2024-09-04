@@ -1,5 +1,6 @@
 import 'package:delivery/src/models/user.dart';
 import 'package:delivery/src/pages/cliente/home/cliente_home_page.dart';
+import 'package:delivery/src/pages/cliente/orders/create/cliente_orders_create_page.dart';
 import 'package:delivery/src/pages/cliente/productos/list/cliente_productos_list_page.dart';
 import 'package:delivery/src/pages/cliente/profile/info/cliente_profile_info_page.dart';
 import 'package:delivery/src/pages/cliente/profile/update/cliente_profile_update_page.dart';
@@ -53,7 +54,8 @@ class _MyAppState extends State<MyApp> {
         GetPage(name: '/client/home', page: ()=>ClienteHomePage()),
         GetPage(name: '/client/products/list', page: ()=>ClienteProductosListPage()),
         GetPage(name: '/client/profile/info', page: ()=>ClienteProfileInfoPage()),
-        GetPage(name: '/client/profile/update', page: ()=>ClienteProfileUpdatePage())
+        GetPage(name: '/client/profile/update', page: ()=>ClienteProfileUpdatePage()),
+        GetPage(name: '/client/orders/create', page: ()=>ClienteOrdersCreatePage())
       ],
       theme: ThemeData(
         primaryColor: Colors.amber,

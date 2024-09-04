@@ -18,7 +18,12 @@ class ClienteProfileInfoPage extends StatelessWidget {
           _backGroundCover(context),
           _boxForm(context),
           _imageUser(context),
-          _buttonBack(),
+          Column(
+            children: [
+              _buttonBack(),
+              _buttonRoles()
+            ],
+          ),
         ],
       ),
       ),
@@ -132,6 +137,19 @@ class ClienteProfileInfoPage extends StatelessWidget {
           radius: 60,
           backgroundColor: Colors.white,
         ),
+      ),
+    );
+  }
+
+  Widget _buttonRoles(){
+    return Container(
+      margin:EdgeInsets.only(right:20,top:20),
+      alignment: Alignment.topRight,
+      child:IconButton(
+          onPressed:()=> controller.goToRoles(),
+          icon: Icon(Icons.supervised_user_circle,
+              color:Colors.white,
+              size:30)
       ),
     );
   }

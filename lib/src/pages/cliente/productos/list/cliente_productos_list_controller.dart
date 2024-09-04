@@ -33,8 +33,11 @@ class ClienteProductosListController extends GetxController{
       return await productsProvider.findByCategory(idCategory);
   }
 
-  void openBottomSheet(BuildContext context, Product product) async{
+  void goToOrderCreate(){
+    Get.toNamed('/client/orders/create');
+  }
 
+  void openBottomSheet(BuildContext context, Product product) async{
     showMaterialModalBottomSheet(
       context: context,
       builder: (context) => ClientProductsDetailPage(product: product),
