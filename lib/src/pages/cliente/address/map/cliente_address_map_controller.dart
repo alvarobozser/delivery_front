@@ -13,8 +13,15 @@ class ClienteAddressMapController extends GetxController{
       target: LatLng(37.1814006,-5.7887763),
       zoom: 14);
 
+  LatLng? addressLatlon;
+  var addressName =''.obs;
+
   Completer<GoogleMapController> mapController = Completer();
   Position? position;
+
+  ClienteAddressMapController(){
+    //checkGPS();
+  }
 
   void onMapCreate(GoogleMapController controller){
     mapController.complete(controller);
@@ -27,6 +34,11 @@ class ClienteAddressMapController extends GetxController{
     List<Placemark> address = await placemarkFromCoordinates(lat, lng);
     if(address.isNotEmpty){
       String direccion = address[0].thoroughfare??'';
+      String street = address[0].subThoroughfare??'';
+      String ciudad = address[0].locality??'';
+      String deparment = address[0].administrativeArea??'';
+      addressName.value= '$direccion#$street,$ciudad,$deparment';
+      addressLatlon = LatLng(lat, lng);
     }
   }
 
@@ -42,6 +54,16 @@ class ClienteAddressMapController extends GetxController{
     }
   }
 
+  void selectRefPoint(BuildContext context){
+    if(addressLatlon!=null){
+      Map<String,dynamic> data = {
+        'address': addressName.value,
+        'lat': addressLatlon!.latitude,
+        'lng': addressLatlon!.longitude,
+      };
+      Navigator.pop(context,data);
+    }
+  }
 
   void updateLocation()async{
     try {

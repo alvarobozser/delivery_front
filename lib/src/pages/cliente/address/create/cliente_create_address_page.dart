@@ -46,6 +46,7 @@ class ClienteAddressCreatePage extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.40,
       margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3, left: 50, right: 50),
       decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
           color: Colors.white,
           boxShadow: <BoxShadow>[
             BoxShadow(
@@ -79,7 +80,7 @@ class ClienteAddressCreatePage extends StatelessWidget {
         controller: con.addressController,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
-            hintText: 'Dirección',
+            hintText: 'Calle/Avenida/Numero',
             prefixIcon: Icon(Icons.location_on)
         ),
       ),
@@ -93,7 +94,7 @@ class ClienteAddressCreatePage extends StatelessWidget {
         controller: con.neighborhoodController,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
-            hintText: 'Barriada',
+            hintText: 'Ciudad/Pueblo',
             prefixIcon: Icon(Icons.location_city)
         ),
       ),
@@ -124,7 +125,7 @@ class ClienteAddressCreatePage extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () =>con.createAddress(),
             //con.createAddress();
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.amber,

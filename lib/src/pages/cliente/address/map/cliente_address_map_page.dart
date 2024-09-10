@@ -9,7 +9,7 @@ class ClienteAddressMapPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=>Scaffold(
       appBar: AppBar(
         title: Text('Ubica tu dirección',
         style: TextStyle(color: Colors.black),),
@@ -21,8 +21,9 @@ class ClienteAddressMapPage extends StatelessWidget{
           _googleMaps(),
           _iconMyLocation(),
           _cardAdress(),
-          _buttonAccept()
-        ],
+          _buttonAccept(context)
+          ],
+        )
       ),
     );
   }
@@ -39,6 +40,9 @@ class ClienteAddressMapPage extends StatelessWidget{
         onCameraMove:(position){
           controller.initialPosition=position;
         },
+      onCameraIdle: ()async{
+          await controller.setLocationDraggableInfo();
+      }
     );
   }
   
@@ -51,13 +55,13 @@ class ClienteAddressMapPage extends StatelessWidget{
     );
   }
 
-  Widget _buttonAccept(){
+  Widget _buttonAccept(BuildContext context){
     return Container(
       alignment: Alignment.bottomCenter,
       margin: EdgeInsets.only(bottom: 20),
       width: double.infinity,
       child: ElevatedButton(
-          onPressed: (){},
+          onPressed: ()=>controller.selectRefPoint(context),
           child: Text('Seleccionar este punto',
           style: TextStyle(color: Colors.black),),
         style: ElevatedButton.styleFrom(
@@ -79,7 +83,7 @@ class ClienteAddressMapPage extends StatelessWidget{
         ),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-          child: Text('Dirección',
+          child: Text(controller.addressName.value,
           style: TextStyle(
             color: Colors.white,
             fontSize: 14,
