@@ -120,63 +120,59 @@ class ClienteProductosListPage extends StatelessWidget {
     );
   }
 
-  Widget _cardProduct(BuildContext context,Product product) {
-    return  GestureDetector(
-      onTap: ()=>controller.openBottomSheet(context,product),
+  Widget _cardProduct(BuildContext context, Product product) {
+    return GestureDetector(
+      onTap: () => controller.openBottomSheet(context, product),
       child: Column(
         children: [
           Container(
-            //margin: EdgeInsets.only(top: 20,left: 20,right: 20),
-            color:const Color.fromRGBO(245, 245, 245, 1.0),
+            margin: EdgeInsets.only(top: 15, left: 20, right: 20),
             child: ListTile(
-                      title: Text(product.name ?? '',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 15,),
-                          Text(product.description ?? '',
-                          maxLines: 2,
-                            style: TextStyle(
-                              fontSize: 13
-                            ),
-                          ),
-                          SizedBox(height: 15,),
-                          Text(
-                            '${product.price.toString()}€',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          ),
-                          SizedBox(height: 10,)
-                        ],
-                      ),
+              title: Text(product.name ?? ''),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 10),
+                  Text(
+                    product.description ?? '',
+                    maxLines: 2,
+                    style: TextStyle(
+                        fontSize: 13
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  Text(
+                    '${product.price.toString()}€',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                ],
+              ),
               trailing: Container(
-                //height: 130,
-                //width: 130,
+                height: 90,
+                width: 70,
+                // padding: EdgeInsets.all(2),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
+                  borderRadius: BorderRadius.circular(12),
                   child: FadeInImage(
-                    image: product.image1!=null ? NetworkImage(product.image1!) as ImageProvider
-                      :AssetImage('assets/img/no-image.png'),
-                    fit: BoxFit.contain,
+                    image: product.image1 != null
+                        ? NetworkImage(product.image1!)
+                        : AssetImage('assets/img/no-image.png') as ImageProvider,
+                    fit: BoxFit.cover,
                     fadeInDuration: Duration(milliseconds: 50),
-                    placeholder: AssetImage('assets/img/no-image.png'),
+                    placeholder:  AssetImage('assets/img/no-image.png'),
                   ),
                 ),
               ),
             ),
           ),
-          Divider(height: 1,color: Colors.grey[500],indent: 37,endIndent: 37,)
+          Divider(height: 1, color: Colors.grey[300], indent: 37, endIndent: 37,)
         ],
       ),
     );
   }
-
 
 }

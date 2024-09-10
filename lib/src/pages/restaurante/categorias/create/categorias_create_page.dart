@@ -33,6 +33,7 @@ class CategoriasCreatePage extends StatelessWidget {
         margin: EdgeInsets.only( top: MediaQuery.of(context).size.height * 0.30,left: 50,right: 50),
         height: MediaQuery.of(context).size.height * 0.40,
         decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
             color: Colors.white,
             boxShadow: <BoxShadow>[
               BoxShadow(
@@ -123,7 +124,9 @@ class CategoriasCreatePage extends StatelessWidget {
               Icon(Icons.category,size: 120,),
               Text('Nueva Categoria',
                 style: TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25),),
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25),),
             ],
           )),
     );

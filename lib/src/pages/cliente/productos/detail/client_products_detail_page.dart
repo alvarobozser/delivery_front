@@ -11,8 +11,27 @@ class ClientProductsDetailPage extends StatelessWidget {
   var counter = 0.obs;
   var price=0.0.obs;
 
+  //var isChecked = false.obs;
+
+  // Lista fija de ingredientes
+  /*final List<String> ingredients = [
+    'Tomate',
+    'Queso',
+    'Lechuga Batavia',
+    'Cebolla',
+    'Pepinillos',
+    'Salsa Barbacoa',
+    'Salsa Mayo',
+  ];*/
+
+  //final RxMap selectedIngredients = {}.obs;
+
   ClientProductsDetailPage({@required this.product}) {
     con=Get.put(ClientProductsDetailController());
+
+    /*for (var ingredient in ingredients) {
+      selectedIngredients[ingredient] = true;
+    }*/
   }
 
   @override
@@ -24,17 +43,41 @@ class ClientProductsDetailPage extends StatelessWidget {
         height: 100,
         child: _buttonsAddToBag(),
       ),
-      body: Column(
+      body:SingleChildScrollView(
+      child: Column(
         children: [
           _imageSlideshow(context),
           _textNameProduct(),
           _textDescriptionProduct(),
-          _textPriceProduct()
+          _textPriceProduct(),
+          //_ingredientList(),
         ],
       ),
     ),
+    ),
     );
   }
+
+  /*Widget _ingredientList() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: selectedIngredients.keys.map((ingredient) {
+          return Obx(() => CheckboxListTile(
+            title: Text(ingredient),
+            value: selectedIngredients[ingredient],
+            onChanged: (bool? value) {
+              if (value != null) {
+                selectedIngredients[ingredient] = value;
+              }
+            },
+          ));
+        }).toList(),
+      ),
+    );
+  }*/
 
   Widget _textNameProduct() {
     return Container(
@@ -138,11 +181,12 @@ class ClientProductsDetailPage extends StatelessWidget {
               Spacer(),
               ElevatedButton(
                 onPressed: ()=>con.addTobBag(product!,price,counter),
-                child: Text('Agregar ${price.value}€',
+                child: Text('Agregar ${price.value.toStringAsFixed(1)}€',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 15
-                  ),),
+                  ),
+                ),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.amber,
                     shape: RoundedRectangleBorder(
@@ -153,7 +197,6 @@ class ClientProductsDetailPage extends StatelessWidget {
             ],
           ),
         ),
-
       ]
     );
   }

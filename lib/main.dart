@@ -1,4 +1,6 @@
 import 'package:delivery/src/models/user.dart';
+import 'package:delivery/src/pages/cliente/address/create/cliente_create_address_page.dart';
+import 'package:delivery/src/pages/cliente/address/list/cliente_list_address_page.dart';
 import 'package:delivery/src/pages/cliente/home/cliente_home_page.dart';
 import 'package:delivery/src/pages/cliente/orders/create/cliente_orders_create_page.dart';
 import 'package:delivery/src/pages/cliente/productos/list/cliente_productos_list_page.dart';
@@ -9,7 +11,6 @@ import 'package:delivery/src/pages/login/login_page.dart';
 import 'package:delivery/src/pages/register/register_page.dart';
 import 'package:delivery/src/pages/repartidor/orders/list/repartidor_orders_list_page.dart';
 import 'package:delivery/src/pages/restaurante/home/restaurante_home_page.dart';
-import 'package:delivery/src/pages/restaurante/orders/list/restaurant_orders_list_page.dart';
 import 'package:delivery/src/pages/roles/roles_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,7 +56,9 @@ class _MyAppState extends State<MyApp> {
         GetPage(name: '/client/products/list', page: ()=>ClienteProductosListPage()),
         GetPage(name: '/client/profile/info', page: ()=>ClienteProfileInfoPage()),
         GetPage(name: '/client/profile/update', page: ()=>ClienteProfileUpdatePage()),
-        GetPage(name: '/client/orders/create', page: ()=>ClienteOrdersCreatePage())
+        GetPage(name: '/client/orders/create', page: ()=>ClienteOrdersCreatePage()),
+        GetPage(name: '/client/address/create', page: ()=>ClienteAddressCreatePage()),
+        GetPage(name: '/client/address/list', page: ()=>ClienteListAddressPage())
       ],
       theme: ThemeData(
         primaryColor: Colors.amber,
