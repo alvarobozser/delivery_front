@@ -31,7 +31,7 @@ class CategoriasCreatePage extends StatelessWidget {
   Widget _boxForm(BuildContext context) {
     return Container(
         margin: EdgeInsets.only( top: MediaQuery.of(context).size.height * 0.30,left: 50,right: 50),
-        height: MediaQuery.of(context).size.height * 0.40,
+        height: MediaQuery.of(context).size.height * 0.45,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             color: Colors.white,

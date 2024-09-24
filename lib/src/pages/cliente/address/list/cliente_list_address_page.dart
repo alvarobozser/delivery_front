@@ -12,6 +12,7 @@ class ClienteListAddressPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: _buttonNext(context),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.amber,
@@ -123,6 +124,29 @@ class ClienteListAddressPage extends StatelessWidget{
             fontSize: 19,
             fontWeight: FontWeight.bold
         ),
+      ),
+    );
+  }
+
+  Widget _buttonNext(BuildContext context){
+    return Container(
+      width: double.infinity,
+      height: 50,
+      margin: EdgeInsets.symmetric(horizontal: 40,vertical: 45),
+      child: ElevatedButton(
+          onPressed: ()=>controller.createOrder(),
+          style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(vertical: 15),
+              backgroundColor: Colors.amber
+          ),
+          child: Text(
+            'Continuar',
+            style: TextStyle(
+                color:Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 17
+            ),
+          )
       ),
     );
   }

@@ -41,7 +41,7 @@ class ClienteProfileInfoPage extends StatelessWidget {
   Widget _boxForm(BuildContext context){
     return Container(
         margin: EdgeInsets.only(top:MediaQuery.of(context).size.height * 0.30,left:50,right: 50),
-        height: MediaQuery.of(context).size.height * 0.4,
+        height: MediaQuery.of(context).size.height * 0.45,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             color: Colors.white,
@@ -107,7 +107,7 @@ class ClienteProfileInfoPage extends StatelessWidget {
   Widget _buttonUpdate(BuildContext context){
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 40,vertical: 40),
+      margin: EdgeInsets.symmetric(horizontal: 40,vertical: 45),
       child: ElevatedButton(
           onPressed: ()=>controller.goToProfileUpdate(),
           style: ElevatedButton.styleFrom(

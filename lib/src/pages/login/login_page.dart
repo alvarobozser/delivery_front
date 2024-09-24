@@ -96,7 +96,7 @@ class LoginPage extends StatelessWidget {
   Widget _boxForm(BuildContext context){
     return Container(
       margin: EdgeInsets.only(top:MediaQuery.of(context).size.height * 0.33,left:50,right: 50),
-      height: MediaQuery.of(context).size.height * 0.40,
+      height: MediaQuery.of(context).size.height * 0.45,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Colors.white,
@@ -137,7 +137,7 @@ class LoginPage extends StatelessWidget {
   Widget _buttonLogin(){
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 40,vertical: 45),
+      margin: EdgeInsets.symmetric(horizontal: 40,vertical: 55),
       child: ElevatedButton(
           onPressed: ()=>controller.login(),
           style: ElevatedButton.styleFrom(

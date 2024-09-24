@@ -7,7 +7,11 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as location;
 
-class ClienteAddressMapController extends GetxController{
+import '../../../../models/order.dart';
+
+class DeliveryOrdersMapController extends GetxController{
+
+  Order order= Order.fromJson(Get.arguments['order']??{});
 
   CameraPosition initialPosition = CameraPosition(
       target: LatLng(37.1814006,-5.7887763),
@@ -19,7 +23,7 @@ class ClienteAddressMapController extends GetxController{
   Completer<GoogleMapController> mapController = Completer();
   Position? position;
 
-  ClienteAddressMapController(){
+  DeliveryOrdersMapController(){
     checkGPS();
   }
 

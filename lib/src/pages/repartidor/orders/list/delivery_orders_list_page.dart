@@ -1,14 +1,14 @@
-import 'package:delivery/src/pages/restaurante/orders/list/restaurant_orders_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../models/order.dart';
 import '../../../../utils/relative_time_util.dart';
 import '../../../../widgets/no_data_widget.dart';
+import 'delivery_orders_list_controller.dart';
 
-class RestaurantOrderListPage extends StatelessWidget {
+class DeliveryOrdersListPage extends StatelessWidget {
 
-  RestaurantOrderListController controller = Get.put(RestaurantOrderListController());
+  DeliveryOrdersListController controller = Get.put(DeliveryOrdersListController());
 
   @override
   Widget build(BuildContext context) {

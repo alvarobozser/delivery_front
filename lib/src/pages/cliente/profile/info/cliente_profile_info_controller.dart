@@ -10,7 +10,8 @@ class ClienteProfileInfoController extends GetxController{
 
   void logOut(){
     GetStorage().remove('user');
-
+    GetStorage().remove('shopping_bag');
+    GetStorage().remove('address');
     Get.offNamedUntil('/', (route)=>false);
   }
 

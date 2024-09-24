@@ -3,14 +3,19 @@ import 'package:delivery/src/pages/cliente/address/create/cliente_create_address
 import 'package:delivery/src/pages/cliente/address/list/cliente_list_address_page.dart';
 import 'package:delivery/src/pages/cliente/home/cliente_home_page.dart';
 import 'package:delivery/src/pages/cliente/orders/create/cliente_orders_create_page.dart';
+import 'package:delivery/src/pages/cliente/payments/create/cliente_payments_create_page.dart';
 import 'package:delivery/src/pages/cliente/productos/list/cliente_productos_list_page.dart';
 import 'package:delivery/src/pages/cliente/profile/info/cliente_profile_info_page.dart';
 import 'package:delivery/src/pages/cliente/profile/update/cliente_profile_update_page.dart';
 import 'package:delivery/src/pages/home/home_page.dart';
 import 'package:delivery/src/pages/login/login_page.dart';
 import 'package:delivery/src/pages/register/register_page.dart';
-import 'package:delivery/src/pages/repartidor/orders/list/repartidor_orders_list_page.dart';
+import 'package:delivery/src/pages/repartidor/home/delivery_home_page.dart';
+import 'package:delivery/src/pages/repartidor/orders/detail/delivery_orders_detail_page.dart';
+import 'package:delivery/src/pages/repartidor/orders/list/delivery_orders_list_page.dart';
+import 'package:delivery/src/pages/repartidor/orders/map/delivery_orders_map_page.dart';
 import 'package:delivery/src/pages/restaurante/home/restaurante_home_page.dart';
+import 'package:delivery/src/pages/restaurante/orders/detail/restaurant_orders_detail_page.dart';
 import 'package:delivery/src/pages/roles/roles_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,14 +56,19 @@ class _MyAppState extends State<MyApp> {
         GetPage(name: '/home', page: ()=>HomePage()),
         GetPage(name: '/roles', page: ()=>RolesPage()),
         GetPage(name: '/restaurant/home', page: ()=>RestauranteHomePage()),
-        GetPage(name: '/delivery/orders/list', page: ()=>RepartidorOrdersListPage()),
+        GetPage(name: '/delivery/home', page: ()=>DeliveryHomePage()),
+        GetPage(name: '/delivery/orders/list', page: ()=>DeliveryOrdersListPage()),
+        GetPage(name: '/delivery/orders/detail', page: ()=>DeliveryOrdersDetailPage()),
+        GetPage(name: '/delivery/orders/map', page: ()=>DeliveryOrdersMapPage()),
         GetPage(name: '/client/home', page: ()=>ClienteHomePage()),
         GetPage(name: '/client/products/list', page: ()=>ClienteProductosListPage()),
         GetPage(name: '/client/profile/info', page: ()=>ClienteProfileInfoPage()),
         GetPage(name: '/client/profile/update', page: ()=>ClienteProfileUpdatePage()),
         GetPage(name: '/client/orders/create', page: ()=>ClienteOrdersCreatePage()),
         GetPage(name: '/client/address/create', page: ()=>ClienteAddressCreatePage()),
-        GetPage(name: '/client/address/list', page: ()=>ClienteListAddressPage())
+        GetPage(name: '/client/address/list', page: ()=>ClienteListAddressPage()),
+        GetPage(name: '/client/payments/create', page: ()=>ClientePaymentsCreatePage()),
+        GetPage(name: '/restaurant/orders/detail', page: ()=>RestaurantOrdersDetailPage())
       ],
       theme: ThemeData(
         primaryColor: Colors.amber,
