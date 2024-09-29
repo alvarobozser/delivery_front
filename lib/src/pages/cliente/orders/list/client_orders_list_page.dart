@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import '../../../../models/order.dart';
 import '../../../../utils/relative_time_util.dart';
 import '../../../../widgets/no_data_widget.dart';
-import 'delivery_orders_list_controller.dart';
+import 'client_orders_list_controller.dart';
 
-class DeliveryOrdersListPage extends StatelessWidget {
+class ClientOrdersListPage extends StatelessWidget {
 
-  DeliveryOrdersListController controller = Get.put(DeliveryOrdersListController());
+  ClientOrdersListController controller = Get.put(ClientOrdersListController());
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +112,7 @@ class DeliveryOrdersListPage extends StatelessWidget {
                       width: double.infinity,
                       margin: EdgeInsets.only(top: 5),
                       alignment: Alignment.centerLeft,
-                      child: Text('Cliente: ${order.client?.name ?? ''} ${order.client?.lastname ?? ''}',
+                      child: Text('Repartidor: ${order.delivery?.name ?? 'No asignado'} ${order.delivery?.lastname ?? ''}',
                       style: TextStyle(color: Colors.black,fontSize: 15),),
                     ),
                     Container(

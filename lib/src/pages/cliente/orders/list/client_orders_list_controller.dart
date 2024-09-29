@@ -5,21 +5,21 @@ import 'package:get_storage/get_storage.dart';
 
 import '../../../../models/user.dart';
 
-class DeliveryOrdersListController extends GetxController{
+class ClientOrdersListController extends GetxController{
 
   OrdersProvider ordersProvider= OrdersProvider();
 
-  List<String> status=<String>['DESPACHADO','EN CAMINO','ENTREGADO'].obs;
+  List<String> status=<String>['PAGADO','DESPACHADO','EN CAMINO','ENTREGADO'].obs;
 
   User user = User.fromJson(GetStorage().read('user')??{});
 
   Future<List<Order>> getOrders(String status)async{
-    return await ordersProvider.findByDeliveryAndStatus(user.id ?? '0',status);
+    return await ordersProvider.findByClientAndStatus(user.id ?? '0',status);
   }
 
 
   void goToDetail(Order order){
-    Get.toNamed('/delivery/orders/detail',
+    Get.toNamed('/client/orders/detail',
         arguments: {
       'order':order.toJson()}
     );

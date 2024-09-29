@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../../../../models/order.dart';
 import '../../../../models/user.dart';
 
-class DeliveryOrdersDetailController extends GetxController {
+class ClientOrdersDetailController extends GetxController {
 
   Order order= Order.fromJson(Get.arguments['order']);
   var total = 0.0.obs;
@@ -18,23 +18,13 @@ class DeliveryOrdersDetailController extends GetxController {
   OrdersProvider orderProvider = OrdersProvider();
   List<User> users = <User>[].obs;
 
-  DeliveryOrdersDetailController(){
+  ClientOrdersDetailController(){
     print('order ${order.toJson()}');
     getTotal();
   }
 
-  void updateOrden()async{
-      ResponseApi responseApi = await orderProvider.updateToOnTheWay(order);
-      Fluttertoast.showToast(msg: responseApi.message??'',toastLength: Toast.LENGTH_LONG);
-      if(responseApi.success==true){
-        goToOrderMap();
-      }else{
-        Get.snackbar('Error en la Petición', responseApi.message??'');
-    }
-  }
-
   void goToOrderMap(){
-    Get.toNamed('/delivery/orders/map',
+    Get.toNamed('/client/orders/map',
         arguments: {'order': order.toJson()});
   }
 

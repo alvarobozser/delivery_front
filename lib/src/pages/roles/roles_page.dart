@@ -37,19 +37,19 @@ class RolesPage extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.only(bottom: 10),
-            height: 100,
-            width: 100,
-            decoration: BoxDecoration(
+            height: 90,
+            width: 90,
+            /*decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(color: Colors.amber, width: 2),
-            ),
-            child: ClipOval(
+            ),*/
+            //child: ClipOval(
               child: FadeInImage(
                 image: NetworkImage(rol.image!),
                 fit: BoxFit.cover,
                 fadeInDuration: Duration(milliseconds: 50),
                 placeholder: AssetImage('assets/img/no-image.png'),
-              ),
+             // ),
             ),
           ),
           Text(
@@ -59,7 +59,7 @@ class RolesPage extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          SizedBox(height: 40), // Aquí agregamos un margen inferior al objeto
+          SizedBox(height: 35), // Aquí agregamos un margen inferior al objeto
         ],
       ),
     );

@@ -10,10 +10,17 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as location;
+import 'package:socket_io_client/socket_io_client.dart';
 import '../../../../models/order.dart';
 
 
-class DeliveryOrdersMapController extends GetxController{
+class ClientOrdersMapController extends GetxController{
+
+  Socket socket=io('${Environment.API_URL}orders/delivery',<String,dynamic>{
+    'transports':['websocket'],
+    'autoConnect':false
+  });
+
 
   Order order = Order.fromJson(Get.arguments['order'] ?? {});
 
@@ -38,9 +45,30 @@ class DeliveryOrdersMapController extends GetxController{
   Set<Polyline> polylines = <Polyline>{}.obs;
   List<LatLng> points = [];
 
-  DeliveryOrdersMapController(){
+  ClientOrdersMapController(){
      print('Order: ${order.toJson()}');
      checkGPS();
+     connectAndListen();
+  }
+
+  void connectAndListen(){
+    socket.connect();
+    socket.onConnect((data){
+      print('Flutter conectado a SocketIO');
+    });
+    listenPosition();
+  }
+
+  void listenPosition(){
+    socket.on('position/${order.id}',(data){
+      addMarker('delivery',
+          data['lat'],
+          data['lng'],
+          'Tu repartidor',
+          '',
+          deliveryMarker!
+      );
+    });
   }
 
   void onMapCreate(GoogleMapController controller){
@@ -118,13 +146,12 @@ class DeliveryOrdersMapController extends GetxController{
     try {
       await _determinePosition();
       position = await Geolocator.getLastKnownPosition();
-      saveLocation();
-      animateCamaraPosition(position?.latitude ?? 37.1814006, position?.longitude ?? -5.7887763);
+      animateCamaraPosition(order.lat ?? 37.1814006, order.lng ?? -5.7887763);
 
       addMarker('delivery',
-          position?.latitude ?? 37.1814006,
-          position?.longitude ?? -5.7887763,
-          'Tu posición',
+          order.lat ?? 37.1814006,
+          order.lng ?? -5.7887763,
+          'Tu repartidor',
           '',
           deliveryMarker!);
       addMarker('home',
@@ -134,28 +161,10 @@ class DeliveryOrdersMapController extends GetxController{
           '',
           homeMarker!);
 
-      LatLng from=LatLng(position!.latitude,position!.longitude);
+      LatLng from=LatLng(order.lat ?? 37.1814006, order.lng ?? -5.7887763);
       LatLng to=LatLng(order.address?.lat ?? 37.1814006,order.address?.lng ?? -5.7887763);
 
       setPolylines(from, to);
-
-      LocationSettings locationSettings=LocationSettings(
-        accuracy: LocationAccuracy.best,
-        distanceFilter: 1
-      );
-
-      positionSuscribe=Geolocator.getPositionStream(
-          locationSettings: locationSettings
-      ).listen((Position pos){
-        position=pos;
-        addMarker('delivery',
-            position?.latitude ?? 37.1814006,
-            position?.longitude ?? -5.7887763,
-            'Tu posición',
-            '',
-            deliveryMarker!);
-      });
-      animateCamaraPosition(position?.latitude ?? 37.1814006, position?.longitude ?? -5.7887763);
 
     }catch(e){
       print('error: ${e}');
@@ -197,14 +206,6 @@ class DeliveryOrdersMapController extends GetxController{
     return await Geolocator.getCurrentPosition();
   }
 
-  void saveLocation()async{
-    if(position!=null){
-      order.lat=position!.latitude;
-      order.lng=position!.longitude;
-    await ordersProvider.updateLatLng(order);
-    }
-
-  }
   //Ojo esta funcionalidad octiva el importe de Google
   Future<void> setPolylines(LatLng from, LatLng to) async {
     PointLatLng pointFrom = PointLatLng(from.latitude, from.longitude);
@@ -240,13 +241,14 @@ class DeliveryOrdersMapController extends GetxController{
   }
 
   void callNumber() async{
-    String number = order.client?.phone ?? ''; //set the number here
+    String number = order.delivery?.phone ?? ''; //set the number here
     await FlutterPhoneDirectCaller.callNumber(number);
   }
 
   @override
   void onClose() {
     super.onClose();
+    socket.disconnect();
     positionSuscribe?.cancel();
   }
 }

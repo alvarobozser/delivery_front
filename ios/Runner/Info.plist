@@ -8,6 +8,10 @@
     <string>Necesito permisos para acceder a la camara</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>Necesito permisos para acceder al microfono</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>tel</string>
+    </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

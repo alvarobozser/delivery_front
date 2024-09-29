@@ -6,22 +6,24 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../../models/product.dart';
 import '../../../../models/user.dart';
 import '../../../../utils/relative_time_util.dart';
-import 'delivery_orders_detail_controller.dart';
+import 'client_orders_detail_controller.dart';
 
-class DeliveryOrdersDetailPage extends StatelessWidget {
+class ClientOrdersDetailPage extends StatelessWidget {
 
-  DeliveryOrdersDetailController controller= Get.put(DeliveryOrdersDetailController());
+  ClientOrdersDetailController controller= Get.put(ClientOrdersDetailController());
 
   @override
   Widget build(BuildContext context) {
     return Obx(()=>Scaffold(
         bottomNavigationBar: Container(
           color: Color.fromRGBO(245, 245, 245, 1),
-          height: MediaQuery.of(context).size.height*0.35,
+          height:controller.order.status=='EN CAMINO'?
+          MediaQuery.of(context).size.height*0.36:
+          MediaQuery.of(context).size.height*0.33,
           child: Column(
             children: [
               _dataDate(),
-              _dataClient(),
+              _dataDelivery(),
               _dataAddress(),
               _totalToPay(context),
             ],
@@ -82,12 +84,12 @@ class DeliveryOrdersDetailPage extends StatelessWidget {
   }
 
 
-  Widget _dataClient() {
+  Widget _dataDelivery() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20),
       child: ListTile(
-        title: Text('Cliente  -  Telefono'),
-        subtitle: Text('${controller.order.client?.name ?? ''} ${controller.order.client?.lastname ?? ''} - ${controller.order.client?.phone ?? ''}'),
+        title: Text('Repartidor  -  Telefono'),
+        subtitle: Text('${controller.order.delivery?.name ?? 'No asignado'} ${controller.order.delivery?.lastname ?? ''} - ${controller.order.delivery?.phone ?? '####'}'),
         trailing: Icon(Icons.person),
       ),
     );
@@ -123,7 +125,9 @@ class DeliveryOrdersDetailPage extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(left: 20, top: 25),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment:controller.order.status=='EN CAMINO'?
+            MainAxisAlignment.center:
+            MainAxisAlignment.start,
             children: [
               Text(
                 'Total: ${controller.total.value}€',
@@ -132,10 +136,7 @@ class DeliveryOrdersDetailPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 17
                 ),
-              ),
-              controller.order.status=='DESPACHADO'
-            ? _updateOrder()
-               :controller.order.status=='EN CAMINO'?
+              ),controller.order.status=='EN CAMINO'?
               _goToOrderMap():Container()
             ],
           ),
@@ -144,24 +145,6 @@ class DeliveryOrdersDetailPage extends StatelessWidget {
     );
   }
 
-  Widget _updateOrder(){
-    return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30),
-      child: ElevatedButton(
-      onPressed: ()=>controller.updateOrden(),
-      style: ElevatedButton.styleFrom(
-      padding: EdgeInsets.all(15),
-      backgroundColor: Colors.cyan[300],
-      ),
-      child: Text(
-      'Iniciar Entrega',
-      style: TextStyle(
-      color: Colors.white
-      ),
-      )
-    )
-    );
-  }
 
 
   Widget _goToOrderMap(){
@@ -174,7 +157,7 @@ class DeliveryOrdersDetailPage extends StatelessWidget {
               backgroundColor: Colors.cyan[300],
             ),
             child: Text(
-              'Volver al mapa',
+              'Ver ubicación del pedido',
               style: TextStyle(
                   color: Colors.white
               ),

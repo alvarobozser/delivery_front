@@ -1,3 +1,4 @@
+import 'package:delivery/src/pages/cliente/orders/list/client_orders_list_page.dart';
 import 'package:delivery/src/pages/cliente/productos/list/cliente_productos_list_page.dart';
 import 'package:delivery/src/pages/cliente/profile/info/cliente_profile_info_page.dart';
 import 'package:delivery/src/pages/repartidor/orders/list/delivery_orders_list_page.dart';
@@ -19,7 +20,7 @@ class ClienteHomePage extends StatelessWidget {
       index:clienteProductosListController.indexTab.value,
       children: [
         Container(color: Colors.black, child: ClienteProductosListPage()),
-        DeliveryOrdersListPage(),
+        ClientOrdersListPage(),
         ClienteProfileInfoPage()
       ],
       )

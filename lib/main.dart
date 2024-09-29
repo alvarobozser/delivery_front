@@ -3,6 +3,8 @@ import 'package:delivery/src/pages/cliente/address/create/cliente_create_address
 import 'package:delivery/src/pages/cliente/address/list/cliente_list_address_page.dart';
 import 'package:delivery/src/pages/cliente/home/cliente_home_page.dart';
 import 'package:delivery/src/pages/cliente/orders/create/cliente_orders_create_page.dart';
+import 'package:delivery/src/pages/cliente/orders/detail/client_orders_detail_page.dart';
+import 'package:delivery/src/pages/cliente/orders/map/client_orders_map_page.dart';
 import 'package:delivery/src/pages/cliente/payments/create/cliente_payments_create_page.dart';
 import 'package:delivery/src/pages/cliente/productos/list/cliente_productos_list_page.dart';
 import 'package:delivery/src/pages/cliente/profile/info/cliente_profile_info_page.dart';
@@ -65,6 +67,8 @@ class _MyAppState extends State<MyApp> {
         GetPage(name: '/client/profile/info', page: ()=>ClienteProfileInfoPage()),
         GetPage(name: '/client/profile/update', page: ()=>ClienteProfileUpdatePage()),
         GetPage(name: '/client/orders/create', page: ()=>ClienteOrdersCreatePage()),
+        GetPage(name: '/client/orders/detail', page: ()=>ClientOrdersDetailPage()),
+        GetPage(name: '/client/orders/map', page: ()=>ClientOrdersMapPage()),
         GetPage(name: '/client/address/create', page: ()=>ClienteAddressCreatePage()),
         GetPage(name: '/client/address/list', page: ()=>ClienteListAddressPage()),
         GetPage(name: '/client/payments/create', page: ()=>ClientePaymentsCreatePage()),
