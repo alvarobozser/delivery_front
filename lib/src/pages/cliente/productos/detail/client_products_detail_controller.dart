@@ -1,5 +1,6 @@
 import 'package:delivery/main.dart';
 import 'package:delivery/src/models/product.dart';
+import 'package:delivery/src/pages/cliente/productos/list/cliente_productos_list_controller.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -9,6 +10,7 @@ class ClientProductsDetailController extends GetxController {
 
 
   List<Product> selectedProducts=[];
+  ClienteProductosListController clienteProductosListController=Get.find();
 
   ClientProductsDetailController(){
   }
@@ -46,6 +48,11 @@ class ClientProductsDetailController extends GetxController {
       }
       GetStorage().write('shopping_bag',selectedProducts);
       Fluttertoast.showToast(msg: 'Añadido a la cesta');
+      clienteProductosListController.items.value=0;
+      selectedProducts.forEach((p){
+        clienteProductosListController.items.value= clienteProductosListController.items.value + p.quantity!;
+      });
+
     }else{
       Fluttertoast.showToast(msg: 'Debes seleccionar al menos un producto');
     }

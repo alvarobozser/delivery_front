@@ -60,6 +60,7 @@ class DeliveryOrdersMapController extends GetxController{
       ResponseApi responseApi=await ordersProvider.updateToDelivered(order);
       Fluttertoast.showToast(msg: responseApi.message??'',toastLength: Toast.LENGTH_LONG);
       if(responseApi.success==true){
+        emitToDelivered();
         Get.offNamedUntil('/delivery/home', (route)=>false);
       }
     }else{
@@ -67,16 +68,19 @@ class DeliveryOrdersMapController extends GetxController{
     }
   }
 
+
   void isCloseToDeliveryPosition(){
     if(position!=null) {
       distanceBetween = Geolocator.distanceBetween(
           position!.latitude,
           position!.longitude,
           order.address!.lat!,
-          order.address!.lng!);
+          order.address!.lng!
+      );
 
       if(distanceBetween<=200 && isClose==false){
         isClose=true;
+        update();
       }
     }
   }
@@ -96,6 +100,12 @@ class DeliveryOrdersMapController extends GetxController{
         'lng': position!.longitude
       });
     }
+  }
+
+  void emitToDelivered(){
+      socket.emit('delivered', {
+        'id_order': order.id,
+    });
   }
 
   void onMapCreate(GoogleMapController controller){
@@ -224,7 +234,7 @@ class DeliveryOrdersMapController extends GetxController{
     controller.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
           target: LatLng(lat,long),
-          zoom: 13,
+          zoom: 14,
           bearing: 0
       )
     ));

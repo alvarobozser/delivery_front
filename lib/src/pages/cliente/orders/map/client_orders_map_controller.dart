@@ -5,6 +5,7 @@ import 'package:delivery/src/providers/orders_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -57,6 +58,7 @@ class ClientOrdersMapController extends GetxController{
       print('Flutter conectado a SocketIO');
     });
     listenPosition();
+    listenToDelivered();
   }
 
   void listenPosition(){
@@ -68,6 +70,14 @@ class ClientOrdersMapController extends GetxController{
           '',
           deliveryMarker!
       );
+    });
+  }
+
+  void listenToDelivered(){
+    socket.on('delivered/${order.id}',(data){
+      Fluttertoast.showToast(msg: 'El estado de tu pedido se actualizo a entregado',
+      toastLength: Toast.LENGTH_LONG);
+      Get.offNamedUntil('/client/home', (route)=>false);
     });
   }
 

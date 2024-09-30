@@ -2,10 +2,13 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../../../models/product.dart';
+import '../../productos/list/cliente_productos_list_controller.dart';
 
 class ClienteOrdersCreateController extends GetxController{
 
   List<Product> selectedProducts=<Product>[].obs;
+  ClienteProductosListController clienteProductosListController=Get.find();
+
 
   var counter = 0.obs;
   var total = 0.0.obs;
@@ -42,6 +45,10 @@ class ClienteOrdersCreateController extends GetxController{
     selectedProducts.insert(index,product);
     GetStorage().write('shopping_bag', selectedProducts);
     getTotal();
+    clienteProductosListController.items.value=0;
+    selectedProducts.forEach((p){
+      clienteProductosListController.items.value= clienteProductosListController.items.value + p.quantity!;
+    });
   }
 
   void removeItem(Product product){
@@ -52,6 +59,10 @@ class ClienteOrdersCreateController extends GetxController{
       selectedProducts.insert(index,product);
       GetStorage().write('shopping_bag', selectedProducts);
       getTotal();
+      clienteProductosListController.items.value=0;
+      selectedProducts.forEach((p){
+        clienteProductosListController.items.value= clienteProductosListController.items.value + p.quantity!;
+      });
     }
   }
 
@@ -59,6 +70,15 @@ class ClienteOrdersCreateController extends GetxController{
     selectedProducts.remove(product);
     GetStorage().write('shopping_bag', selectedProducts);
     getTotal();
+    clienteProductosListController.items.value=0;
+    if(selectedProducts.length==0){
+      clienteProductosListController.items.value=0;
+    }else {
+      selectedProducts.forEach((p) {
+        clienteProductosListController.items.value =
+            clienteProductosListController.items.value + p.quantity!;
+      });
+    }
   }
 
   void goToAddressList(){

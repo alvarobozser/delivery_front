@@ -44,6 +44,7 @@ class OrdersProvider extends GetConnect {
       Get.snackbar('Peticion denegada', 'Tu usuario no tiene permitido leer esta informacion');
       return [];
     }
+    print('Response body: ${response.body}');
 
     List<Order> orders = Order.fromJsonList(response.body);
 
@@ -123,6 +124,7 @@ class OrdersProvider extends GetConnect {
           'Authorization': userSession.sessionToken ?? ''
         }
     ); // ESPERAR HASTA QUE EL SERVIDOR NOS RETORNE LA RESPUESTA
+    print('Response body: ${response.body}');
 
     ResponseApi responseApi = ResponseApi.fromJson(response.body);
 

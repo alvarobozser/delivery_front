@@ -46,7 +46,7 @@ class ClienteProductosListPage extends StatelessWidget {
           body: TabBarView(
               children:  controller.categorias.map((Categorias categorias){
                 return FutureBuilder(
-                    future: controller.getProducts(categorias.id??'1'),
+                    future: controller.getProducts(categorias.id??'1',controller.productName.value),
                     builder: (context,AsyncSnapshot<List<Product>> snapshot){
                         if(snapshot.hasData){
 
@@ -76,12 +76,42 @@ class ClienteProductosListPage extends StatelessWidget {
     return SafeArea(
       child: Container(
         margin: EdgeInsets.only(left: 5),
-        child: IconButton(
+        child: controller.items.value>0
+            ?Stack(
+          children: [
+            IconButton(
+                onPressed: ()=>controller.goToOrderCreate(),
+                icon: Icon(
+                  Icons.shopping_bag_outlined,
+                  color: Colors.black,
+                  size: 35,
+                )
+            ),
+            Positioned(
+                right: 5,
+                top: 12,
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                   '${controller.items.value}',
+                  style: TextStyle(
+                        fontSize: 12),
+                  ),
+                  width: 15,
+                  height: 16,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(30))
+                  ),
+                ))
+          ],
+        ):IconButton(
             onPressed: ()=>controller.goToOrderCreate(),
             icon: Icon(
               Icons.shopping_bag_outlined,
               color: Colors.black,
-              size: 30,)
+              size: 30,
+            )
         ),
       ),
     );
@@ -92,6 +122,7 @@ class ClienteProductosListPage extends StatelessWidget {
       child:Container(
         width: MediaQuery.of(context).size.width * 0.75,
         child: TextField(
+            onChanged: controller.onChangeText,
             decoration: InputDecoration(
               hintText: 'Buscar...',
               suffixIcon: Icon(Icons.search,color: Colors.grey),
