@@ -134,13 +134,13 @@ class ClienteListAddressPage extends StatelessWidget{
       height: 50,
       margin: EdgeInsets.symmetric(horizontal: 40,vertical: 45),
       child: ElevatedButton(
-          onPressed: ()=>controller.createOrder(),
+          onPressed: ()=>controller.createOrder(context),
           style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 15),
               backgroundColor: Colors.amber
           ),
           child: Text(
-            'Continuar',
+            'Pagar',
             style: TextStyle(
                 color:Colors.black,
                 fontWeight: FontWeight.bold,

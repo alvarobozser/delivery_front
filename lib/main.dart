@@ -19,14 +19,39 @@ import 'package:delivery/src/pages/repartidor/orders/map/delivery_orders_map_pag
 import 'package:delivery/src/pages/restaurante/home/restaurante_home_page.dart';
 import 'package:delivery/src/pages/restaurante/orders/detail/restaurant_orders_detail_page.dart';
 import 'package:delivery/src/pages/roles/roles_page.dart';
+import 'package:delivery/src/providers/push_notifications_provider.dart';
+import 'package:delivery/src/utils/firebase_config.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 User userSession = User.fromJson(GetStorage().read('user')??{});
+PushNotificationsProvider pushNotificationsProvider = PushNotificationsProvider();
 
-void main() async{
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp(options: FirebaseConfig.currentPlatform);
+  print('Recibiendo notificacion en segundo plano ${message.messageId}');
+  //pushNotificationsProvider.showNotification(message);
+}
+
+void main() async {
   await GetStorage.init();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Stripe.publishableKey='pk_test_51Q586tJM7CBfXVFiAtGzjRsjgGaCwnOJOa492yLv84ZOTyA1AQLdrxLvjBPA6rzH2xRQNAPUgmEVQ3yuL3okg8dA00mOY7wswe';
+  await Stripe.instance.applySettings();
+
+  await Firebase.initializeApp(
+    options: FirebaseConfig.currentPlatform,
+  );
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  pushNotificationsProvider.initPushNotifications();
   runApp(const MyApp());
 }
 
@@ -44,6 +69,7 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
     print('TOKEN ${userSession.sessionToken}');
+    pushNotificationsProvider.onMessageListener();
   }
 
   @override
