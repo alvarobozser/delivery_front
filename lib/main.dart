@@ -35,7 +35,7 @@ PushNotificationsProvider pushNotificationsProvider = PushNotificationsProvider(
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp(options: FirebaseConfig.currentPlatform);
+  //await Firebase.initializeApp(options: FirebaseConfig.currentPlatform);
   print('Recibiendo notificacion en segundo plano ${message.messageId}');
   //pushNotificationsProvider.showNotification(message);
 }
@@ -50,8 +50,8 @@ void main() async {
   await Firebase.initializeApp(
     options: FirebaseConfig.currentPlatform,
   );
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  pushNotificationsProvider.initPushNotifications();
+  /*FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  pushNotificationsProvider.initPushNotifications();*/
   runApp(const MyApp());
 }
 

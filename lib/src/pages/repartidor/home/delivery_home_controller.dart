@@ -8,7 +8,7 @@ class DeliveryHomeController extends GetxController{
 
   var indexTab = 0.obs;
 
-  PushNotificationsProvider pushNotificationsProvider= PushNotificationsProvider();
+  //PushNotificationsProvider pushNotificationsProvider= PushNotificationsProvider();
 
   User user= User.fromJson(GetStorage().read('user')??{});
 
@@ -22,7 +22,7 @@ class DeliveryHomeController extends GetxController{
 
   void saveToken(){
     if(user.id!=null){
-      pushNotificationsProvider.saveToken(user.id!);
+      //pushNotificationsProvider.saveToken(user.id!);
     }
   }
 

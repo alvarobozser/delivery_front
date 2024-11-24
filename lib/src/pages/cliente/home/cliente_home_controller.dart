@@ -8,7 +8,7 @@ import '../../../models/user.dart';
 
 class ClienteHomeController extends GetxController{
 
-  PushNotificationsProvider pushNotificationsProvider= PushNotificationsProvider();
+  //PushNotificationsProvider pushNotificationsProvider= PushNotificationsProvider();
 
   User user= User.fromJson(GetStorage().read('user')??{});
 
@@ -24,7 +24,7 @@ class ClienteHomeController extends GetxController{
 
   void saveToken(){
     if(user.id!=null){
-      pushNotificationsProvider.saveToken(user.id!);
+      //pushNotificationsProvider.saveToken(user.id!);
     }
   }
 

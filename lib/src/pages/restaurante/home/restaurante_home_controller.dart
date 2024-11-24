@@ -6,7 +6,7 @@ import '../../../providers/push_notifications_provider.dart';
 
 class RestaurantHomeController extends GetxController{
 
-  PushNotificationsProvider pushNotificationsProvider= PushNotificationsProvider();
+  //PushNotificationsProvider pushNotificationsProvider= PushNotificationsProvider();
 
   User user= User.fromJson(GetStorage().read('user')??{});
 
@@ -22,7 +22,7 @@ class RestaurantHomeController extends GetxController{
 
   void saveToken(){
     if(user.id!=null){
-      pushNotificationsProvider.saveToken(user.id!);
+      //pushNotificationsProvider.saveToken(user.id!);
     }
   }
 
